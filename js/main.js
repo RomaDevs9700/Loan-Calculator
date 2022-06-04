@@ -98,8 +98,13 @@ function creditCalc(){
 	creditDeadline = 6;
   }
   
+  // Tanlangan kredit miqdori va muddati
   document.getElementById('sumAll').innerHTML = `<b>${creditSum}</b>`;
   document.getElementById('monthLimit').innerHTML = `<b>${creditDeadline}</b>`;
+
+  
+  document.getElementById('creditSum').value = creditSum;
+  document.getElementById('creditDeadline').value = creditDeadline;
 
   // Presents choice
   if (credit.present1.choice) {
