@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Credit Calculator</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="row my-3">
+      <!-- Header section -->
+      <h2 class="my-3 fw-bold">Kredit kalkulyatori</h2>
+
+      <div class="col-8 border calculator-form">
+        <form>
+          <div class="row p-3">
+            <!-- Avto Kredit section -->
+            <h5 class="fw-bold">Kredit turi</h5>
+            <div class="col-8 kredit_turi">
+              <select class="form-select" aria-label="Default select example">
+                <option value="1">Avto kredit</option>
+              </select>
+            </div>
+            
+            <!-- Kredit turi section -->
+            <div class="col-4 kredit_shakli">
+              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="creditForm" id="annuitet" value="annuitetForm"
+                  autocomplete="off" onclick="annuitetForm()" />
+                <label class="btn btn-outline-success" for="annuitet">Annuitet</label>
+
+                <input type="radio" class="btn-check" name="creditForm" id="diffirent" value="diffirentForm"
+                  autocomplete="off" onclick="diffirentForm()" />
+                <label class="btn btn-outline-success" for="diffirent">Differ. to'lovlar</label>
+              </div>
+            </div>
+
+            <!-- Kredit foiz turi section -->
+            <div class="col-12 boshlangich_tulov d-flex justify-content-between my-4">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="firstPay" id="presentAmount1" value="option1"
+                  onclick="creditPresent1()" />
+                <label class="form-check-label" for="presentAmount1">Boshlang'ich to'lov 20%</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="firstPay" id="presentAmount2" value="option2"
+                  onclick="creditPresent2()" />
+                <label class="form-check-label" for="presentAmount2">Boshlang'ich to'lov 30%</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="firstPay" id="presentAmount3" value="option3"
+                  onclick="creditPresent3()" />
+                <label class="form-check-label" for="presentAmount3">Boshlang'ich to'lov 50%</label>
+              </div>
+            </div>
+
+            <!-- Kredit miqdori section -->
+            <div class="col-12 kredit_miqdori mb-3">
+              <div class="my-2">
+                <label for="creditSum" class="form-label fw-bold">Kredit miqdori</label>
+                <input type="number" class="form-control" id="creditSum" value="5000000" min="5 000 000" max="400 000 000"
+                  placeholder="5 000 000" />
+              </div>
+              <div class="d-flex justify-content-between">
+                <div><span>5 mln</span></div>
+                <div><span>400 mln</span></div>
+              </div>
+            </div>
+
+            <!-- Kredit muddati section -->
+            <div class="col-12 kredit_muddati my-3">
+              <div class="my-2">
+                <label for="creditDeadline" class="form-label fw-bold">Kredit nuddati (oy)</label>
+                <input type="number" class="form-control" id="creditDeadline" value="6" min="6" max="48" placeholder="6" />
+              </div>
+              <div class="d-flex justify-content-between">
+                <div><span>6 oy</span></div>
+                <div><span>48 oy</span></div>
+              </div>
+            </div>
+            <!-- Tanlangan Kredit section -->
+            <div class="col-12 d-flex justify-content-around">
+              <div>
+                Tanlangan kredit miqdori:
+                <div id="sumAll"></div>
+              </div>
+              <div>
+                Tanlangan kredit muddati:
+                <div id="monthLimit"></div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="col-1"></div>
+
+      <!-- Kredit info section -->
+      <div class="col-3 border calculator-info bg-text-secondary">
+        <div class="row info-list">
+          <div class="col-12 px-4 pt-3 info-item">
+            <div class="info-value fw-bold text-success">
+              <span class="monthFee">0</span>
+              <span class="t-currency">so'm</span>
+            </div>
+            <div class="info-meta">oylik to'lov</div>
+          </div>
+          <div class="col-12 px-4 pt-3 info-item">
+            <div class="info-value fw-bold text-success">
+              <span class="presentCurrent">0</span>
+              <span class="t-currency">%</span>
+            </div>
+            <div class="info-meta">Foiz</div>
+          </div>
+          <div class="col-12 px-4 pt-3 info-item">
+            <div class="info-value fw-bold text-success">
+              <span class="allPresentFee">0</span>
+              <span class="t-currency">so'm</span>
+            </div>
+            <div class="info-meta">To'liq foizli to'lov</div>
+          </div>
+          <div class="col-12 px-4 pt-3 info-item">
+            <div class="info-value fw-bold text-success">
+              <span class="allCreditAmount">0</span>
+              <span class="t-currency">so'm</span>
+            </div>
+            <div class="info-meta">Umumiy Kredit miqdori</div>
+          </div>
+          <div class="py-3">
+            <a href="#" id="paymentOrder" class="btn btn-success" onclick="creditCalc()">To'lov tartibi</a>
+          </div>
+          <small>*dastlabki hisob.</small>
+        </div>
+      </div>
+
+      <!-- Kredit Kalendar section -->
+      <div class="col-12 tulov-tartibi">
+        <div class="card mt-3">
+          <div class="card-header">
+            <h5 class="fw-bold">To'lov tartibi</h5>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-around">
+              <table class="table-md table-responsive table-striped table-hover">
+
+                <thead>
+                  <tr class="text">
+                    <th class="px-3">Oy</th>
+                    <th class="px-3">Asosiy qarzning qoldig'i</th>
+                    <th class="px-3">Asosiy qarz bo'yicha to'lov</th>
+                    <th class="px-3">Foizlarni to'lash</th>
+                    <th class="px-3">To'lovning umumiy miqdori</th>
+                  </tr>
+                </thead>
+
+                <tbody id="result"></tbody>
+
+                <tfoot>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th id="all-payment"></th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+  <script src="./js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+/* Style */
+
+.monthFee, .presentCurrent, .allPresentFee, .allCreditAmount, .t-currency {
+    font-size: 1.95rem;
+    line-height: 2.225rem;
+}
