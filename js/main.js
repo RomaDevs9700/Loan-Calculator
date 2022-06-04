@@ -94,8 +94,8 @@ function creditCalc(){
   creditDeadline = Number(creditDeadline)
   if (creditDeadline > 48){
 	creditDeadline = 48;
-  } else if(creditDeadline < 1) {
-	creditDeadline = 1;
+  } else if(creditDeadline < 6) {
+	creditDeadline = 6;
   }
   
   document.getElementById('sumAll').innerHTML = creditSum;
