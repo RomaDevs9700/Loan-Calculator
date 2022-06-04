@@ -98,8 +98,8 @@ function creditCalc(){
 	creditDeadline = 6;
   }
   
-  document.getElementById('sumAll').innerHTML = creditSum;
-  document.getElementById('monthLimit').innerHTML = creditDeadline;
+  document.getElementById('sumAll').innerHTML = `<b>${creditSum}</b>`;
+  document.getElementById('monthLimit').innerHTML = `<b>${creditDeadline}</b>`;
 
   // Presents choice
   if (credit.present1.choice) {
